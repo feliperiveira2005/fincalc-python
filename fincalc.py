@@ -28,6 +28,21 @@ def calcular_aposentadoria(
     return saldo
 
 
+def calcular_valor_futuro(
+    aporte_mensal: float, taxa_mensal: float, meses: int
+) -> float:
+    """Calcula o valor futuro de aportes mensais ao fim de cada mês."""
+    if aporte_mensal < 0:
+        raise ValueError("O aporte mensal não pode ser negativo.")
+    if meses == 0:
+        return 0.0
+    if taxa_mensal == 0:
+        return aporte_mensal * meses
+
+    i = taxa_mensal / 100
+    return aporte_mensal * (((1 + i) ** meses - 1) / i)
+
+
 if __name__ == "__main__":
     print("Iniciando o sistema FinCalc...")
 
